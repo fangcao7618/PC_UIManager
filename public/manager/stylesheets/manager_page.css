@@ -1,0 +1,222 @@
+.manager-content {
+    display: flex;
+    flex:1;
+    position: relative;
+}
+.manager-content .manager-ui-info {
+    width: 300px;
+    display: none;
+}
+.manager-content .manager-ui-show, .manager-content .manager-page-show {
+    width: 320px;
+    margin:62px auto 0;
+    overflow: hidden;
+    height: 480px;
+    transition:box-shadow 0.5s;
+    background: #fff;
+}
+.manager-content .manager-page-show:hover {
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+}
+.manager-content .manager-page-analyse {
+    display: none;
+}
+.manager-page-modules {
+    overflow: hidden;
+    background: #fff;
+    transition:width 0.3s cubic-bezier(.14, .56, .63, 1.17);
+    width: 0px;
+}
+.manager-page-modules.show {
+    width: 320px;
+}
+.manager-info-wrapper label {
+    line-height: 30px;
+    width: 80px;
+    text-align: right;
+    display: inline-block;
+}
+#page-manager-iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+#iframe-wrapper {
+    height: 100%;
+    width: 100%;
+}
+.page-manager-goto-preview {
+    line-height: 30px;
+}
+.module-ui-wrapper {
+    width: 320px;
+    margin-top: 20px;
+}
+/*.module-ui-wrapper{
+    overflow: hidden;
+    transition:width 0.3s cubic-bezier(.14,.56,.63,1.17); 
+    margin-top: 20px;
+    width: 0px;
+}*/
+
+/*.manager-ui-wrapper.show{
+    width: 320px;
+}*/
+ .module-ui-download {
+    line-height: 20px;
+}
+#watch-source {
+    cursor: pointer;
+    line-height: 20px;
+}
+.board {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    left: 0;
+    top: 0;
+    overflow: scroll;
+    -webkit-overflow-scrolling:touch;
+    color: #fff;
+    box-sizing:border-box;
+    padding: 64px;
+    display: none;
+}
+.board.show {
+    display: block;
+}
+.page-data pre, .page-source pre {
+    white-space: pre-wrap;
+    color: #fff;
+    font-size:14px;
+}
+.qrCode {
+    display: none;
+}
+.board .close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 64px;
+    height: 64px;
+    color: #fff;
+    font-size: 32px;
+    line-height: 64px;
+    text-align: center;
+    cursor: pointer;
+    transition:all 0.5s;
+}
+.board .close:hover {
+    color: #ec1b51;
+}
+.manager-page-qrcode {
+    position: absolute;
+    background: #fff;
+    width: 320px;
+    top: 10px;
+    left: 5px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+    display: none;
+    transition:height 0.5s;
+    padding: 10px;
+    max-height: 80%;
+    overflow: auto;
+}
+.manager-page-qrcode.show {
+    display: block;
+}
+.manager-page-info {
+    position: absolute;
+    background: #fff;
+    width: 300px;
+    top: 10px;
+    left: 70px;
+    border-radius: 5px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+    transition:height 0.5s;
+    padding: 10px;
+    display: none;
+}
+.manager-page-info.show {
+    display: block;
+}
+.git-info {
+    position: absolute;
+    background: #fff;
+    width: 300px;
+    top: 10px;
+    left: 130px;
+    border-radius: 5px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+    transition:height 0.5s;
+    padding: 10px;
+    display: none;
+}
+.git-info.show {
+    display: block;
+}
+.manager-page-info label {
+    text-align: right;
+    width: 100px;
+    display: inline-block;
+}
+.page-feedback {
+    text-align: left;
+    font-size: 12px;
+    -webkit-animation:growth 1s;
+}
+.page-feedback span {
+    color: #999;
+}
+.page-feedback a.ok {
+    color: #3495e6;
+}
+.page-feedback a.warning {
+    color: #f32c35;
+}
+.page-feedback textarea {
+    resize:none;
+    outline: none;
+    width: 100%;
+    box-sizing:border-box;
+    padding: 5px;
+    height: 120px;
+}
+input[type=submit] {
+    background-color: #ffb94b;
+    background-image: -webkit-linear-gradient(top, #fddb6f, #ffb94b);
+    background-image: linear-gradient(top, #fddb6f, #ffb94b);
+    border-radius: 3px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3) inset;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #d69e31 #e3a037 #d5982d #e3a037;
+    height: 35px;
+    padding: 0;
+    width: 120px;
+    cursor: pointer;
+    color: #8f5a0a;
+    font-size: 16px;
+    outline: none;
+}
+.page-feedback .form {
+    display: none;
+    -webkit-animation:growth 1s;
+}
+.page-feedback .form.show {
+    display: block;
+}
+@-webkit-keyframes growth {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+

@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>1号店UIManager-<%=project%></title>
+    <link rel="stylesheet" href="/manager/fonts/yhd-icon/style.css">
+    <link rel="stylesheet" href="/manager/stylesheets/base.css">
+    <link rel="stylesheet" href="/manager/stylesheets/manager_page_home.css">
+</head>
+<body>
+    <header>
+        <a href="/"><h1>1UI</h1></a>
+        <ul>
+        <div class="git-repo">
+            <label class="icon-github"></label>
+            <input type="text" value="http://192.168.112.94/tvvt/project.git <%=project%>" class="git-repo-address">
+        </div>
+        </ul>
+    </header>
+    <div class="manager-page-list">
+        <% for(var i = 0;i<pages.length;i++){%>
+            <div class="iframe-wrapper" data-href="/<%=project %>/pages/<%=pages[i]%>" data-name="<%=pages[i]%>">
+                 <a class="iframe-link" href="#">
+                <iframe id="page-manager-iframe" name="page-manager-iframe" scrolling="yes" src="/<%=project %>/pages/preview/<%=pages[i]%>" frameborder="0" ></iframe>
+                </a>
+            </div>
+        <%}%>
+    </div>
+    <footer>&copy; TvvT 2014.</footer>
+    <script src="/manager/scripts/jquery/jquery.min.js"></script>
+    <script src="/manager/scripts/toMatrix3D.js"></script>
+    <script type="text/javascript" src="/manager/scripts/manager_page_home.js"></script>
+</body>
+</html>
