@@ -1,7 +1,7 @@
 // TODO 长连接的关闭和清理
 var webSocketServer = require('ws').Server,
 	wss = wss ? wss : new webSocketServer({
-		port: 8081
+		port: 8082
 	}),
 	wsGroup = {}; //ws连接池
 

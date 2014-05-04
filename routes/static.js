@@ -6,7 +6,7 @@ var fs = require('fs'),
 //获取public下静态文件的接口 TODO 文件缓存 避免每次都读文件
 exports.getFile = function(req, res) {
 	var fileName = req.params[0],
-		realPath = path.join(__dirname,'../../Projects/' + fileName);
+		realPath = path.join(__dirname,'../../pc_project/' + fileName);
 	path.exists(realPath, function(exists) {
 		if (!exists) {
 			res.send("This request URL " + fileName + " was not found on this server.");

@@ -18,7 +18,7 @@ for (var dev in ifaces) {
 var link = 'http://' + ipAddress + ':' + settings.port;
 
 exports.index = function(req, res) {
-    var realPath = path.join(__dirname, '../../Projects/');
+    var realPath = path.join(__dirname, '../../pc_project/');
     var dir = fs.readdirSync(realPath);
     dir = _.without(dir, 
     	".bowerrc",

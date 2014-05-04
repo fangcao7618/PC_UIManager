@@ -28,7 +28,7 @@ var link = 'http://' + ipAddress + ':' + settings.port;
 exports.list = function(req, res) {
     var projectName = req.params.projectName;
     var managerPageListPath = managerPath + 'manager_page_home.ejs';
-    var realPath = path.join(__dirname, '../../Projects/' + projectName + '/pages/');
+    var realPath = path.join(__dirname, '../../pc_project/' + projectName + '/pages/');
     var fileNames = utils.getDirFileNames(realPath, true, '.ejs'); //获得所有page
 
     var renderData = {
@@ -51,7 +51,7 @@ exports.feedBack = function(req, res) {
             time = date.getFullYear() + '/' + date.getMonth() + '/' + date.getDay() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
         var insertData = dateId + ',' + time + ',' + data.projectName + ',' + data.pageName + ',' + data.clientInfo + ',' + data.isOK + ',' + feedBack + ';\n'
 
-        var infoPath = path.join(__dirname, '../../Projects/' + data.projectName + '/info');
+        var infoPath = path.join(__dirname, '../../pc_project/' + data.projectName + '/info');
         fs.exists(infoPath, function(exists) {
             if (!exists) {
                 //如果没有这个文件 那么创建一个
@@ -85,7 +85,7 @@ exports.feedBack = function(req, res) {
 }
 
 
-//由于Projects是express的默认views文件夹 因此无需对res设置header
+//由于pc_project是express的默认views文件夹 因此无需对res设置header
 exports.page = function(req, res) {
 
     //进行浏览器检测   
@@ -101,8 +101,8 @@ exports.page = function(req, res) {
             } else {
 
                 try {
-                    var pageConfig = require('../../Projects/' + projectName + '/pages/' + pageName + '.config.json'),
-                        pageData = requireUncache('../../Projects/' + projectName + '/pages/' + pageName + '.data.json');
+                    var pageConfig = require('../../pc_project/' + projectName + '/pages/' + pageName + '.config.json'),
+                        pageData = requireUncache('../../pc_project/' + projectName + '/pages/' + pageName + '.data.json');
                 } catch (e) {
                     console.log(e);
                     var pageConfig = {},
@@ -112,8 +112,8 @@ exports.page = function(req, res) {
                 var pageEjs,
                     modules;
                 var renderData = {
-                    baseUrl: link + '/projects/' + projectName,
-                    publicUrl: link + '/projects/public',
+                    baseUrl: link + '/pc_project/' + projectName,
+                    publicUrl: link + '/pc_project/public',
                     managerUrl: link + '/' + projectName,
                     moduleConfig: pageConfig,
                     projectName: projectName,
@@ -122,7 +122,7 @@ exports.page = function(req, res) {
                     randonNum: utils.getRandomMd5()
                 }
                 utils.extend(renderData, pageData);
-                var realPath = path.join(__dirname, '../../Projects/' + projectName + '/pages/' + pageName + '.ejs');
+                var realPath = path.join(__dirname, '../../pc_project/' + projectName + '/pages/' + pageName + '.ejs');
                 fs.readFile(realPath, "utf-8", function(err, file) {
                     if (err) {
                         console.log(err);
@@ -173,22 +173,22 @@ exports.pagePreview = function(req, res) {
             res.send("404...")
         } else {
             try {
-                var pageConfig = require('../../Projects/' + projectName + '/pages/' + pageName + '.config.json'),
-                    pageData = requireUncache('../../Projects/' + projectName + '/pages/' + pageName + '.data.json');
+                var pageConfig = require('../../pc_project/' + projectName + '/pages/' + pageName + '.config.json'),
+                    pageData = requireUncache('../../pc_project/' + projectName + '/pages/' + pageName + '.data.json');
             } catch (e) {
                 console.log(e);
                 var pageConfig = {},
                     pageData = {};
             }
             var renderData = {
-                baseUrl: link + '/projects/' + projectName,
-                publicUrl: link + '/projects/public',
+                baseUrl: link + '/pc_project/' + projectName,
+                publicUrl: link + '/pc_project/public',
                 managerUrl: link + '/' + projectName,
                 moduleConfig: pageConfig,
                 pageName: pageName
             }
             utils.extend(renderData, pageData);
-            var realPath = path.join(__dirname, '../../Projects/' + projectName + '/pages/' + pageName + '.ejs');
+            var realPath = path.join(__dirname, '../../pc_project/' + projectName + '/pages/' + pageName + '.ejs');
 
             try {
                 var file = fs.readFileSync(realPath, "utf-8");
@@ -215,21 +215,21 @@ exports.downloadPackage = function(req, res) {
         cmd = "mkdir ./temp/components;",
         renderData = {};
 
-    var realPath = path.join(__dirname, '../../Projects/' + projectName + '/pages/' + pageName + '.ejs');
+    var realPath = path.join(__dirname, '../../pc_project/' + projectName + '/pages/' + pageName + '.ejs');
     var file = fs.readFileSync(realPath, "utf-8");
     modules = getModules(file);
 
     //copy compenents
     for (var i = 0; i < modules.length; i++) {
-        cmd += "cp ../Projects/" + projectName + "/components/" + modules[i] + ".ejs temp/components/" + modules[i] + ".ejs;"
+        cmd += "cp ../pc_project/" + projectName + "/components/" + modules[i] + ".ejs temp/components/" + modules[i] + ".ejs;"
     }
 
     //copy js css ejs
     var downloadPath = [
-        "cp ../Projects/" + projectName + "/resource/css/" + pageName + ".css temp/" + pageName + ".css;",
-        "cp ../Projects/" + projectName + "/resource/scripts/" + pageName + ".js temp/" + pageName + ".js;",
-        "cp ../Projects/" + projectName + "/pages/" + pageName + ".ejs temp/" + pageName + ".ejs;",
-        "cp -r ../Projects/" + projectName + "/resource/img temp/img;"
+        "cp ../pc_project/" + projectName + "/resource/css/" + pageName + ".css temp/" + pageName + ".css;",
+        "cp ../pc_project/" + projectName + "/resource/scripts/" + pageName + ".js temp/" + pageName + ".js;",
+        "cp ../pc_project/" + projectName + "/pages/" + pageName + ".ejs temp/" + pageName + ".ejs;",
+        "cp -r ../pc_project/" + projectName + "/resource/img temp/img;"
     ]
 
     for (var i = 0; i < downloadPath.length; i++) {
@@ -238,16 +238,16 @@ exports.downloadPackage = function(req, res) {
 
     //生成html文件
     try {
-        var pageConfig = require('../../Projects/' + projectName + '/pages/' + pageName + '.config.json'),
-            pageData = require('../../Projects/' + projectName + '/pages/' + pageName + '.data.json');
+        var pageConfig = require('../../pc_project/' + projectName + '/pages/' + pageName + '.config.json'),
+            pageData = require('../../pc_project/' + projectName + '/pages/' + pageName + '.data.json');
     } catch (e) {
         console.error(e);
         var pageConfig = {},
             pageData = {};
     }
     var renderData = {
-        baseUrl: link + '/projects/' + projectName,
-        publicUrl: link + '/projects/public',
+        baseUrl: link + '/pc_project/' + projectName,
+        publicUrl: link + '/pc_project/public',
         managerUrl: link + '/' + projectName,
         moduleConfig: pageConfig,
         pageName: pageName
@@ -259,7 +259,7 @@ exports.downloadPackage = function(req, res) {
     pageConfig.layout = pageConfig.layout ? pageConfig.layout : 'layout.ejs';
     var source = getHtmls([projectName + '/layouts/' + pageConfig.layout], renderData)[0],
         htmlPath = path.join(__dirname, '../temp/' + pageName + '.html');
-    var regx = /^[http:\/\/]{1}.+\/projects\/.+\/resource\/(scripts|css|script|images)\//ig;
+    var regx = /^[http:\/\/]{1}.+\/pc_project\/.+\/resource\/(scripts|css|script|images)\//ig;
     source = source.replace(regx, function($0, $1) {
         if ($1 === 'images') {
             return './images/';
@@ -316,8 +316,8 @@ function getModuleConfig(moduleType, name) {
 
 function renderData(projectName) {
     return {
-        baseUrl: link + '/projects/' + projectName,
-        publicUrl: link + '/projects/public',
+        baseUrl: link + '/pc_project/' + projectName,
+        publicUrl: link + '/pc_project/public',
         managerUrl: link + '/' + projectName,
     }
 }
@@ -332,7 +332,7 @@ function getModuleRenderData(projectName, modules) {
     var data = {};
     for (var i = 0; i < modules.length; i++) {
         try {
-            data[modules[i]] = require('../../Projects/' + projectName + '/components/' + modules[i] + '.data.json')[modules[i]];
+            data[modules[i]] = require('../../pc_project/' + projectName + '/components/' + modules[i] + '.data.json')[modules[i]];
         } catch (e) {
             console.log(e);
             data[modules[i]] = {};
@@ -344,7 +344,7 @@ function getModuleRenderData(projectName, modules) {
 function getHtmls(pathNames, renderData) {
     var htmls = [];
     for (var i = 0; i < pathNames.length; i++) {
-        var pathName = path.join(__dirname, '../../Projects/' + pathNames[i]);
+        var pathName = path.join(__dirname, '../../pc_project/' + pathNames[i]);
         renderData.filename = pathName;
         var html = ejs.render(read(pathName, 'utf8'), renderData);
         htmls.push(html);

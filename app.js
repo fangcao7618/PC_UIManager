@@ -13,7 +13,7 @@ var app = express();
 
 // all environments
 app.set('port', process.env.PORT || port);
-app.set('views', path.join(__dirname, '../Projects'));
+app.set('views', path.join(__dirname, '../pc_project'));
 
 app.set('view engine', 'ejs');
 app.use(express.favicon(path.join(__dirname, 'public/manager/images/favicon.ico')));
@@ -49,7 +49,7 @@ app.get('/:projectName/pages/preview/:name', pages.pagePreview);
 app.get('/:projectName/pages/download/:name',pages.downloadPackage);
 
 //读取public下面的静态文件
-app.get('/projects/*', _static.getFile);
+app.get('/pc_project/*', _static.getFile);
 
 // 404 TODO
 app.get('*', function(req, res){

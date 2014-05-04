@@ -41,7 +41,7 @@ exports.list = function(req, res) {
 exports.uiDownload = function(req, res) {
 	var uiName = req.params.name;
 	var projectName = req.params.projectName;
-	var downloadLink = path.join(__dirname, '../../Projects/'+projectName+'/components/'+uiName+'.ejs')
+	var downloadLink = path.join(__dirname, '../../pc_project/'+projectName+'/components/'+uiName+'.ejs')
 	res.download(downloadLink, uiName+'.ejs', function(err) {
 		if (err) {
 			console.log(err);

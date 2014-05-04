@@ -46,13 +46,13 @@ exports.readFile = function(filePath, charset, callback) {
 }
 
 /**
- * [checkFileExist 判断文件在Projects文件夹中是否存在]如果pageName.ejs存在 返回true 否则返回false 其他的文件如若不存在则自动创建
+ * [checkFileExist 判断文件在pc_project文件夹中是否存在]如果pageName.ejs存在 返回true 否则返回false 其他的文件如若不存在则自动创建
  * @param  {[string]} projectName
  * @param  {[string]} pageName
  * @return {[boolean]}
  */
 exports.checkFileExist = function(projectName, pageName, callback) {
-    var realPath = path.join(__dirname, '../../Projects/' + projectName + '/pages/' + pageName),
+    var realPath = path.join(__dirname, '../../pc_project/' + projectName + '/pages/' + pageName),
         realPathEjs = realPath + '.ejs',
         realPathConfig = realPath + '.config.json',
         realPathData = realPath + '.data.json';
